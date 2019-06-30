@@ -1,0 +1,17 @@
+---
+- name: Add Backports repo
+  apt_repository:
+    repo: deb http://deb.debian.org/debian stretch-backports main
+    state: present
+  tags:
+    - certbot
+    
+- name: Install Certbot for nginx
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - certbot
+    - python-certbot-nginx
+  tags:
+    - certbot

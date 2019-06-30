@@ -1,0 +1,22 @@
+---
+- include_tasks: install_certbot_rhel7.yml
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == '7'
+  tags:
+    - certbot
+
+- include_tasks: install_certbot_fedora.yml
+  when: ansible_distribution == "Fedora" and ansible_distribution_major_version > '26'
+  tags:
+    - certbot
+
+- include_tasks: install_certbot_debian.yml
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version == '9'
+  tags:
+    - certbot
+  
+- name: Check for revoked or expirered certificates twice a day and renew them.
+  cron:
+    name: certbot renewal
+    minute: "30"
+    hour: "3,15"
+    job: "certbot renew"

@@ -1,0 +1,6 @@
+---
+nginx_sites_path: /etc/nginx/sites
+nginx_path: /etc/nginx
+nginx_user: www-data
+nginx_dhparams_path: /etc/ssl/nginx.dhparams
+nginx_dhparams_size: 4096

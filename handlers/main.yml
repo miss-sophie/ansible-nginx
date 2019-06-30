@@ -1,0 +1,26 @@
+---
+- name: Restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+- name: Reload nginx
+  service:
+    name: nginx
+    state: reloaded
+
+- name: Nginx config verified
+  command: nginx -t
+
+- name: Restart firewalld
+  service: 
+    name: firewalld 
+    state: restarted
+
+- name: Reload firewalld
+  service: 
+    name: firewalld 
+    state: reloaded
+
+- name: Install Certificates
+  command: certbot --nginx --email {{ letsencrypt_email }} --non-interactive --agree-tos -d {{ domains|join(',') }}

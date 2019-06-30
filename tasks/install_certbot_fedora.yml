@@ -1,0 +1,8 @@
+---
+- name: Install Certbot for nginx
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - certbot
+    - certbot-nginx

@@ -1,0 +1,1 @@
+Installs nginx on RedHat* Distros with Let`s encypt support.

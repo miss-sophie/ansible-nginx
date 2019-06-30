@@ -1,0 +1,48 @@
+---
+- name: Install nginx
+  package:
+    name: nginx
+    state: present
+  tags:
+    - nginx
+
+- name: Create nginx sites directory
+  file:
+    path: "{{ nginx_sites_path }}"
+    state: directory
+    owner: root
+  tags:
+    - nginx
+
+- name: Copy basic nginx configuration
+  template:
+    src: nginx.conf
+    dest: "{{ nginx_path }}/nginx.conf"
+  tags:
+    - nginx
+  notify:
+    - Reload nginx
+    - Nginx config verified
+
+- name: Create dhparams
+  command: "openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
+  args:
+    creates: "{{ nginx_dhparams_path }}"
+  tags:
+    - nginx
+  notify:
+    - Restart nginx
+
+- name: Install Certbot
+  include_tasks: certbot.yml
+  tags:
+    - nginx
+    - certbot
+    
+- name: Start and enable nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  tags:
+    - nginx
