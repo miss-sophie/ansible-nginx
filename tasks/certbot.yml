@@ -14,9 +14,9 @@
   tags:
     - certbot
   
-- name: Check for revoked or expirered certificates twice a day and renew them.
+- name: "Set cron: Check for revoked or expirered certificates twice a day and renew them."
   cron:
-    name: certbot renewal
+    name: "certbot renewal"
     minute: "30"
     hour: "3,15"
     job: "certbot renew"

@@ -1,4 +1,10 @@
 ---
+- name: Make sure nginx user exists
+  user:
+    name: "{{nginx_user}}"
+    shell: /bin/false
+    create_home: False
+
 - name: Install nginx
   package:
     name: nginx
@@ -25,7 +31,7 @@
     - Nginx config verified
 
 - name: Create dhparams
-  command: "openssl dhparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
+  command: "openssl dhparam -dsaparam -out {{ nginx_dhparams_path }} {{ nginx_dhparams_size }}"
   args:
     creates: "{{ nginx_dhparams_path }}"
   tags:
@@ -35,6 +41,7 @@
 
 - name: Install Certbot
   include_tasks: certbot.yml
+  when: install_certbot|bool
   tags:
     - nginx
     - certbot
