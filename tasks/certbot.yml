@@ -10,7 +10,7 @@
     - certbot
 
 - include_tasks: install_certbot_debian.yml
-  when: ansible_distribution == "Debian" and ansible_distribution_major_version == '9'
+  when: ansible_distribution == "Debian" and ansible_distribution_major_version >= '9'
   tags:
     - certbot
   

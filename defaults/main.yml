@@ -5,3 +5,7 @@ nginx_user: nginx
 nginx_dhparams_path: /etc/ssl/nginx.dhparams
 nginx_dhparams_size: 4096
 install_certbot: False
+certificates_base_path: /etc/letsencrypt/live
+ssl_certificate: fullchain.pem
+ssl_certificate_key: privkey.pem
+ssl_trusted_certificate: chain.pem
