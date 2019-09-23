@@ -53,3 +53,8 @@
     enabled: yes
   tags:
     - nginx
+
+- name: Configure firewalld
+  include_tasks: firewalld.yml
+  when: "'firewalld' in ansible_facts.packages"
+...    

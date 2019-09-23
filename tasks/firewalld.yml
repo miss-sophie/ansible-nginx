@@ -1,0 +1,13 @@
+---
+- name: Allow http
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: Allow https
+  firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+...
